@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# MVP Teams Organization - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This document covers frontend flow and frontend architecture only.
 
-## Available Scripts
+## Frontend Flow
 
-In the project directory, you can run:
+1. User lands on Login (`/`) or Signup (`/signup`).
+2. After successful auth, app stores the user session and routes to `/dashboard`.
+3. User can navigate to Organizations (`/organizations`) to manage organizations.
+4. Teams (`/teams`) and Members (`/members`) are guarded.
+5. If the user has no organization, guarded routes redirect to `/organizations`.
+6. Profile (`/profile`) is available for logged-in users.
 
-### `npm start`
+### Route Behavior
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Public routes:
+  - `/`
+  - `/signup`
+- Protected routes:
+  - `/dashboard`
+  - `/organizations`
+  - `/teams`
+  - `/members`
+  - `/profile`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Session Behavior
 
-### `npm test`
+- Auth state is managed through Auth Context.
+- Session persists in `sessionStorage` under `user`.
+- Protected navigation uses route-level guards and redirects.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Frontend Architecture
 
-### `npm run build`
+### High-Level Layers
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Routing Layer (`src/routes`)
+	- Defines public/protected routes.
+	- Applies organization guard for Teams and Members.
+2. Layout Layer (`src/layouts`)
+	- Shared page structure for auth pages and dashboard pages.
+3. Page Layer (`src/pages`)
+	- Screen-level views for Dashboard, Organization, Teams, Members, Profile, Login, Signup.
+4. Component Layer (`src/components`)
+	- Reusable UI blocks used by pages.
+5. State/Context Layer (`src/context`)
+	- Global auth/session state.
+6. Data Layer (`src/api`)
+	- API request functions, auth header helpers, and client-side cache logic.
+7. Utility Layer (`src/utils`)
+	- App constants and validation helpers.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Folder Architecture
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```text
+ui/
+  src/
+	 api/            # API requests and cache helpers
+	 components/     # Reusable UI components
+	 context/        # Global auth/session context
+	 layouts/        # Shared app layouts
+	 pages/          # Route-level pages
+	 routes/         # Route map and guards
+	 utils/          # Constants and validators
+```
 
-### `npm run eject`
+### Data and UI Interaction Pattern
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Page renders and triggers an action.
+2. Action calls a function in `src/api`.
+3. API layer returns parsed data (or error).
+4. Page updates local/context state.
+5. Reusable components render updated UI.

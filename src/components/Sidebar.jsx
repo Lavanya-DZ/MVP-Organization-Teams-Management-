@@ -1,13 +1,14 @@
 import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { ROUTES } from "../utils/constants";
 
 const navItems = [
-  { name: "Dashboard", path: "/dashboard" },
-  { name: "Organizations", path: "/organizations" },
-  { name: "Teams", path: "/teams" },
-  { name: "Members", path: "/members" },
-  { name: "Profile", path: "/profile" },
+  { name: "Dashboard", path: ROUTES.DASHBOARD },
+  { name: "Organizations", path: ROUTES.ORGANIZATIONS },
+  { name: "Teams", path: ROUTES.TEAMS },
+  { name: "Members", path: ROUTES.MEMBERS },
+  { name: "Profile", path: ROUTES.PROFILE },
 ];
 
 function Sidebar() {
@@ -16,7 +17,7 @@ function Sidebar() {
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate(ROUTES.LOGIN);
   };
 
   return (

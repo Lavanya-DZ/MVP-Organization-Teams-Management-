@@ -1,15 +1,16 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import PageHeader from "../components/PageHeader";
 
 function Profile(){
   const { user } = useContext(AuthContext);
 
   return(
     <div className="space-y-5">
-      <div>
-        <h2 className="text-2xl font-semibold text-slate-900">Profile</h2>
-        <p className="mt-1 text-sm text-slate-600">Manage your account and workspace preferences.</p>
-      </div>
+      <PageHeader
+        title="Profile"
+        description="Manage your account and workspace preferences."
+      />
 
       <section className="max-w-2xl rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-slate-900">Account Details</h3>
