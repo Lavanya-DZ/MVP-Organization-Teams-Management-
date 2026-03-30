@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MVP Teams Organization - Frontend
 
 This document covers frontend flow and frontend architecture only.
@@ -70,3 +71,6 @@ ui/
 3. API layer returns parsed data (or error).
 4. Page updates local/context state.
 5. Reusable components render updated UI.
+=======
+
+>>>>>>> refs/rewritten/3-changed-the-flow-of-the-UI
