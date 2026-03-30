@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # MVP Teams Organization - Frontend
 
 This document covers frontend flow and frontend architecture only.
@@ -35,33 +34,33 @@ This document covers frontend flow and frontend architecture only.
 ### High-Level Layers
 
 1. Routing Layer (`src/routes`)
-	- Defines public/protected routes.
-	- Applies organization guard for Teams and Members.
+   - Defines public/protected routes.
+   - Applies organization guard for Teams and Members.
 2. Layout Layer (`src/layouts`)
-	- Shared page structure for auth pages and dashboard pages.
+   - Shared page structure for auth pages and dashboard pages.
 3. Page Layer (`src/pages`)
-	- Screen-level views for Dashboard, Organization, Teams, Members, Profile, Login, Signup.
+   - Screen-level views for Dashboard, Organization, Teams, Members, Profile, Login, Signup.
 4. Component Layer (`src/components`)
-	- Reusable UI blocks used by pages.
+   - Reusable UI blocks used by pages.
 5. State/Context Layer (`src/context`)
-	- Global auth/session state.
+   - Global auth/session state.
 6. Data Layer (`src/api`)
-	- API request functions, auth header helpers, and client-side cache logic.
+   - API request functions, auth header helpers, and client-side cache logic.
 7. Utility Layer (`src/utils`)
-	- App constants and validation helpers.
+   - App constants and validation helpers.
 
 ### Folder Architecture
 
 ```text
 ui/
   src/
-	 api/            # API requests and cache helpers
-	 components/     # Reusable UI components
-	 context/        # Global auth/session context
-	 layouts/        # Shared app layouts
-	 pages/          # Route-level pages
-	 routes/         # Route map and guards
-	 utils/          # Constants and validators
+    api/            # API requests and cache helpers
+    components/     # Reusable UI components
+    context/        # Global auth/session context
+    layouts/        # Shared app layouts
+    pages/          # Route-level pages
+    routes/         # Route map and guards
+    utils/          # Constants and validators
 ```
 
 ### Data and UI Interaction Pattern
@@ -71,6 +70,3 @@ ui/
 3. API layer returns parsed data (or error).
 4. Page updates local/context state.
 5. Reusable components render updated UI.
-=======
-
->>>>>>> refs/rewritten/3-changed-the-flow-of-the-UI
